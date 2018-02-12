@@ -4,6 +4,9 @@
         <meta charset="utf-8">
         <title>Rune Writer</title>
         <style media="screen">
+            *{
+                font-size: 23px;
+            }
             body{
                 margin: 0px;
 				/*overflow: hidden;*/
@@ -25,13 +28,51 @@
         </style>
     </head>
     <body>
-        <textarea name="name" rows="16" cols="80" placeholder="enter some text here..."></textarea>
+        <textarea name="name" rows="16" cols="80" id="output" placeholder="enter some text here..."></textarea>
 
         <div class="settings">
             <select id="alphabetSelect" onchange="console.log(selectedAplhabet = this.value)">
             </select>
+            <button type="button" onclick="document.getElementById('output').value = text2runes(document.getElementById('output').value)">Text to Runes</button>
+            <!-- <button type="button" onclick="document.getElementById('output').value = runes2text(document.getElementById('output').value)">Runes to Text</button> -->
         </div>
         <script type="text/javascript">
+        function text2runes(str) {
+            var output = "";
+            for (var i = 0; i < str.length; i++) {
+                var translation = dictionary[selectedAplhabet][str.charAt(i)];
+                if (typeof translation != "undefined") {
+                    output += translation;
+                }else {
+                    output += str.charAt(i);
+                }
+            }
+            return output
+        }
+        function runes2text(str) {
+            var output = "";
+            var letters = str.split('');
+            // console.log(letters);
+            // for (var i = 0; i < str.length; i++) {
+            //     // var result = dictionary.filter(function( obj ) { return obj == str.charAt(i) });
+            //     // output += result[0];
+            //     output += findByValue(dictionary[selectedAplhabet], str.charAt(i));
+            //     console.log(str.charAt(i));
+            // }
+            function findByValue(obj, val) {
+                var output;
+                for (var v in obj) {
+                    if (obj.hasOwnProperty(v)) {
+                        if (obj[v] == val) {
+                            output = v;
+                        }
+                        // console.log(obj[v]);
+                    }
+                }
+                return output;
+            }
+            return output
+        }
         document.oninput = function(evt) {
             evt = evt || window.event;
             var translation = dictionary[selectedAplhabet][evt.data];
