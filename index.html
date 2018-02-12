@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Rune Writer</title>
+        <style media="screen">
+            body{
+                margin: 0px;
+				overflow: hidden;
+            }
+            textarea{
+                /*box-shadow: 10px 5px 5px #dddddd;*/
+                width:100%;
+                height:100vh;
+                box-sizing: bolder-box;         /* For IE and modern versions of Chrome */
+                -moz-box-sizing: bolder-box;    /* For Firefox                          */
+                -webkit-box-sizing: bolder-box; /* For Safari                           */
+            }
+            .settings{
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                border: 3px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <textarea name="name" rows="16" cols="80" placeholder="enter some text here..."></textarea>
+
+        <div class="settings">
+            <select id="alphabetSelect" onchange="console.log(selectedAplhabet = this.value)">
+            </select>
+        </div>
+        <script type="text/javascript">
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            var charCode = evt.keyCode || evt.which;
+            var charStr = String.fromCharCode(charCode);
+            var translation = dictionary[selectedAplhabet][charStr];
+            if (typeof translation != "undefined") {
+                evt.preventDefault();
+                document.activeElement.value = document.activeElement.value + translation;
+            }
+        };
+        var dictionary = {
+            "old turkish runes": {
+                "A" : "𐰀‬",
+                "a" : "𐰀‬",
+                "B" : "𐰋‬",
+                "b" : "𐰋‬",
+                "C" : "𐰱",
+                "c" : "𐰱",
+                "Ç" : "𐰲‬",
+                "ç" : "𐰲‬",
+                "D" : "𐰨",
+                "d" : "𐰨",
+                "E" : "𐰁",
+                "e" : "𐰁",
+                "F" : "𐰓‬",
+                "f" : "𐰓‬",
+                "G" : "𐰏‬",
+                "g" : "𐰏‬",
+                "Ğ" : "𐰍‬",
+                "ğ" : "𐰍‬",
+                "H" : "𐰶‬",
+                "h" : "𐰶‬",
+                "İ" : "𐰃‬",
+                "i" : "𐰃‬",
+                "I" : "𐰹‬",
+                "ı" : "𐰹‬",
+                "J" : "𐰧",
+                "j" : "𐰧",
+                "K" : "𐰚‬",
+                "k" : "𐰚‬",
+                "L" : "𐰞‬",
+                "l" : "𐰞‬",
+                "M" : "𐰢‬",
+                "m" : "𐰢‬",
+                "N" : "𐰭‬",
+                "n" : "𐰭‬",
+                "O" : "𐰆‬",
+                "o" : "𐰆‬",
+                "Ö" : "𐰇‬‬",
+                "ö" : "𐰇‬",
+                "P" : "𐰯‬",
+                "p" : "𐰯‬",
+                "R" : "𐰼‬",
+                "r" : "𐰼‬",
+                "S" : "𐰾‬",
+                "s" : "𐰾‬",
+                "Ş" : "𐱁",
+                "Ş" : "𐱁",
+                "T" : "𐱃",
+                "t" : "𐱃",
+                "U" : "𐰆",
+                "u" : "𐰆",
+                "Ü" : "𐰻",
+                "ü" : "𐰻",
+                "V" : "𐰡",
+                "v" : "𐰡",
+                "Y" : "𐰖‬",
+                "y" : "𐰖‬",
+                "Z" : "𐰤‬",
+                "z" : "𐰤‬"
+
+            },
+            "futhark": {},
+            "standart": {
+                /*
+                "A" : "",
+                "a" : "",
+                "B" : "",
+                "b" : "",
+                "C" : "",
+                "c" : "",
+                "D" : "",
+                "d" : "",
+                "E" : "",
+                "e" : "",
+                "F" : "",
+                "f" : "",
+                "G" : "",
+                "g" : "",
+                "H" : "",
+                "h" : "",
+                "I" : "",
+                "i" : "",
+                "J" : "",
+                "j" : "",
+                "K" : "",
+                "k" : "",
+                "L" : "",
+                "l" : "",
+                "M" : "",
+                "m" : "",
+                "N" : "",
+                "n" : "",
+                "O" : "",
+                "o" : "",
+                "P" : "",
+                "p" : "",
+                "Q" : "",
+                "q" : "",
+                "R" : "",
+                "r" : "",
+                "S" : "",
+                "s" : "",
+                "T" : "",
+                "t" : "",
+                "U" : "",
+                "u" : "",
+                "V" : "",
+                "v" : "",
+                "W" : "",
+                "w" : "",
+                "X" : "",
+                "x" : "",
+                "Y" : "",
+                "y" : "",
+                "Z" : "",
+                "z" : ""
+                */
+            }
+        }
+        var selectedAplhabet = Object.keys(dictionary)[0];
+        function initSettings() {
+            for (var v in dictionary) {
+                if (dictionary.hasOwnProperty(v)) {
+                    document.getElementById("alphabetSelect").innerHTML += "<option value='"+v+"'>"+v+"</option>";
+                }
+            }
+        }
+        initSettings();
+        </script>
+    </body>
+</html>
