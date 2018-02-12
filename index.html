@@ -6,7 +6,7 @@
         <style media="screen">
             body{
                 margin: 0px;
-				overflow: hidden;
+				/*overflow: hidden;*/
             }
             textarea{
                 /*box-shadow: 10px 5px 5px #dddddd;*/
@@ -17,7 +17,7 @@
                 -webkit-box-sizing: bolder-box; /* For Safari                           */
             }
             .settings{
-                position: absolute;
+                position: fixed;
                 bottom: 0;
                 right: 0;
                 border: 3px solid black;
@@ -32,13 +32,11 @@
             </select>
         </div>
         <script type="text/javascript">
-        document.onkeydown = function(evt) {
+        document.oninput = function(evt) {
             evt = evt || window.event;
-            var charCode = evt.keyCode || evt.which;
-            var charStr = String.fromCharCode(charCode);
-            var translation = dictionary[selectedAplhabet][charStr];
+            var translation = dictionary[selectedAplhabet][evt.data];
             if (typeof translation != "undefined") {
-                evt.preventDefault();
+                document.activeElement.value = document.activeElement.value.slice(0, -1);
                 document.activeElement.value = document.activeElement.value + translation;
             }
         };
@@ -172,5 +170,6 @@
         }
         initSettings();
         </script>
+
     </body>
 </html>
