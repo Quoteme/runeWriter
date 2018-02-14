@@ -25,6 +25,9 @@
                 right: 0;
                 border: 3px solid black;
             }
+            .settings button, .settings select{
+                font-size: 5vh;
+            }
         </style>
     </head>
     <body>
@@ -74,9 +77,10 @@
             return output
         }
         document.oninput = function(evt) {
+            console.log(evt);
             evt = evt || window.event;
             var translation = dictionary[selectedAplhabet][evt.data];
-            if (typeof translation != "undefined") {
+            if (typeof translation != "undefined" && typeof window.orientation === 'undefined') {
                 document.activeElement.value = document.activeElement.value.slice(0, -1);
                 document.activeElement.value = document.activeElement.value + translation;
             }
